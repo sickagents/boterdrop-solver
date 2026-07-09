@@ -36,7 +36,7 @@ config = {
     "headless": True,
     "thread": 3,
     "page_count": 2,
-    "proxy_support": False,
+    "proxy_support": True,
     "proxy_file": "proxies.txt",
     "host": "0.0.0.0",
     "port": 8000,
@@ -49,9 +49,9 @@ with open("config.json", "w") as f:
 print(f"Config saved. Port: {config['port']}, Threads: {config['thread']}")
 ```
 
-### Step 4: Start Server (Foreground)
+### Step 4: Start Server
 
-Jalankan server di terminal terpisah agar bisa dipantau:
+Jalankan di **terminal terpisah** (bukan di Jupyter), agar bisa dipantau:
 
 ```bash
 cd /path/to/boterdrop-solver
