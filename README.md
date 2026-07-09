@@ -49,30 +49,16 @@ with open("config.json", "w") as f:
 print(f"Config saved. Port: {config['port']}, Threads: {config['thread']}")
 ```
 
-### Step 4: Start Server (Background)
+### Step 4: Start Server (Foreground)
 
-```python
-import subprocess, sys, time, requests
+Jalankan server di terminal terpisah agar bisa dipantau:
 
-proc = subprocess.Popen(
-    [sys.executable, "api_server.py"],
-    stdout=subprocess.PIPE,
-    stderr=subprocess.STDOUT,
-)
-print(f"Server starting... PID: {proc.pid}")
-
-for i in range(30):
-    time.sleep(2)
-    try:
-        r = requests.get("http://localhost:8000/", timeout=2)
-        if r.status_code == 200:
-            print(f"Server ready after {(i+1)*2}s")
-            break
-    except:
-        pass
-else:
-    print("Server may not be ready yet")
+```bash
+cd /path/to/boterdrop-solver
+echo "Y" | python3 api_server.py
 ```
+
+Server akan jalan di `http://0.0.0.0:8000`. Biarkan terminal ini terbuka.
 
 ### Step 5: Test Turnstile Solve
 
@@ -91,14 +77,6 @@ else:
     print(f"Error: {data}")
 ```
 
-### Step 6: Stop Server
-
-```python
-proc.terminate()
-proc.wait()
-print("Server stopped")
-```
-
 ## API Endpoints
 
 | Endpoint | Method | Params | Description |
@@ -114,5 +92,5 @@ print("Server stopped")
 apt update -y && apt install -y xvfb libasound2
 pip install fastapi==0.95.2 uvicorn "camoufox[fetch]" loguru psutil playwright
 python3 -m camoufox fetch
-python3 api_server.py
+echo "Y" | python3 api_server.py
 ```
