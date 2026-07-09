@@ -1,15 +1,10 @@
-# Format proxy yang didukung (satu proxy per baris):
-#
-# Tanpa autentikasi:
-#   protocol://host:port
-#
-# Dengan autentikasi:
-#   protocol://user:pass@host:port
-#
-# Protocol yang didukung: http, https, socks5
-#
-# Contoh:
-# http://203.0.113.10:3128
-# socks5://203.0.113.20:1080
-# http://username:password@203.0.113.30:8080
-# socks5://username:password@203.0.113.40:1080
+http://hpeigrcr-1:ajim54op2rq6@p.webshare.io:80
+http://hpeigrcr-2:ajim54op2rq6@p.webshare.io:80
+http://hpeigrcr-3:ajim54op2rq6@p.webshare.io:80
+http://hpeigrcr-4:ajim54op2rq6@p.webshare.io:80
+http://hpeigrcr-5:ajim54op2rq6@p.webshare.io:80
+http://hpeigrcr-6:ajim54op2rq6@p.webshare.io:80
+http://hpeigrcr-7:ajim54op2rq6@p.webshare.io:80
+http://hpeigrcr-8:ajim54op2rq6@p.webshare.io:80
+http://hpeigrcr-9:ajim54op2rq6@p.webshare.io:80
+http://hpeigrcr-10:ajim54op2rq6@p.webshare.io:80
