@@ -10,10 +10,13 @@ Local CAPTCHA solver (Turnstile, cf_clearance, reCAPTCHA v3, AWS WAF). FastAPI +
 import subprocess, sys
 
 subprocess.run(["apt-get", "update", "-qq"], check=True)
-subprocess.run(["apt-get", "install", "-y", "-qq", "xvfb", "libasound2"], check=True)
+subprocess.run(["apt-get", "install", "-y", "-qq", "xvfb", "libasound2", "libgtk-3-0", "libdbus-glib-1-2", "libxt6"], check=True)
 
 subprocess.run([sys.executable, "-m", "pip", "install", "-q",
-    "fastapi==0.95.2", "uvicorn", "camoufox[fetch]", "loguru", "psutil", "playwright"], check=True)
+    "fastapi==0.95.2", "uvicorn", "camoufox[fetch]", "loguru", "psutil", "playwright==1.49.1"], check=True)
+
+subprocess.run([sys.executable, "-m", "playwright", "install"], check=True)
+print("Playwright browsers installed")
 
 print("Done")
 ```
@@ -102,8 +105,9 @@ else:
 ```bash
 git clone https://github.com/sickagents/boterdrop-solver ~/boterdrop-solver
 cd ~/boterdrop-solver
-apt update -y && apt install -y xvfb libasound2
-pip install fastapi==0.95.2 uvicorn "camoufox[fetch]" loguru psutil playwright
+apt update -y && apt install -y xvfb libasound2 libgtk-3-0 libdbus-glib-1-2 libxt6
+pip install fastapi==0.95.2 uvicorn "camoufox[fetch]" loguru psutil playwright==1.49.1
+python3 -m playwright install
 python3 -m camoufox fetch
 echo "Y" | python3 api_server.py
 ```
