@@ -23,14 +23,16 @@ print("Done")
 ```python
 import subprocess, sys, os
 
-# Clone repo
-if not os.path.exists("boterdrop-solver"):
-    subprocess.run(["git", "clone", "https://github.com/sickagents/boterdrop-solver"], check=True)
+REPO_DIR = os.path.expanduser("~/boterdrop-solver")
 
-# Fetch Camoufox browser
-os.chdir("boterdrop-solver")
+if not os.path.exists(REPO_DIR):
+    subprocess.run(["git", "clone", "https://github.com/sickagents/boterdrop-solver", REPO_DIR], check=True)
+    print(f"Cloned to {REPO_DIR}")
+else:
+    print(f"Already exists: {REPO_DIR}")
+
 subprocess.run([sys.executable, "-m", "camoufox", "fetch"], check=True)
-print("Ready")
+print("Camoufox fetched")
 ```
 
 ### Step 3: Config
@@ -38,7 +40,7 @@ print("Ready")
 ```python
 import json, os
 
-os.chdir("boterdrop-solver")
+REPO_DIR = os.path.expanduser("~/boterdrop-solver")
 
 config = {
     "headless": True,
@@ -51,10 +53,11 @@ config = {
     "debug": False
 }
 
-with open("config.json", "w") as f:
+config_path = os.path.join(REPO_DIR, "config.json")
+with open(config_path, "w") as f:
     json.dump(config, f, indent=4)
 
-print(f"Config saved. Port: {config['port']}, Threads: {config['thread']}")
+print(f"Config saved: {config_path}")
 ```
 
 ### Step 4: Start Server
@@ -97,8 +100,8 @@ else:
 ## Terminal Setup (Non-Jupyter)
 
 ```bash
-git clone https://github.com/sickagents/boterdrop-solver
-cd boterdrop-solver
+git clone https://github.com/sickagents/boterdrop-solver ~/boterdrop-solver
+cd ~/boterdrop-solver
 apt update -y && apt install -y xvfb libasound2
 pip install fastapi==0.95.2 uvicorn "camoufox[fetch]" loguru psutil playwright
 python3 -m camoufox fetch
