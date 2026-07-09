@@ -18,19 +18,27 @@ subprocess.run([sys.executable, "-m", "pip", "install", "-q",
 print("Done")
 ```
 
-### Step 2: Fetch Camoufox Browser
+### Step 2: Clone & Fetch
 
 ```python
-import subprocess, sys
+import subprocess, sys, os
 
+# Clone repo
+if not os.path.exists("boterdrop-solver"):
+    subprocess.run(["git", "clone", "https://github.com/sickagents/boterdrop-solver"], check=True)
+
+# Fetch Camoufox browser
+os.chdir("boterdrop-solver")
 subprocess.run([sys.executable, "-m", "camoufox", "fetch"], check=True)
-print("Camoufox fetched")
+print("Ready")
 ```
 
 ### Step 3: Config
 
 ```python
-import json
+import json, os
+
+os.chdir("boterdrop-solver")
 
 config = {
     "headless": True,
@@ -51,10 +59,10 @@ print(f"Config saved. Port: {config['port']}, Threads: {config['thread']}")
 
 ### Step 4: Start Server
 
-Jalankan di **terminal terpisah** (bukan di Jupyter), agar bisa dipantau:
+Jalankan di **terminal terpisah** (bukan Jupyter):
 
 ```bash
-cd /path/to/boterdrop-solver
+cd ~/boterdrop-solver
 echo "Y" | python3 api_server.py
 ```
 
@@ -89,6 +97,8 @@ else:
 ## Terminal Setup (Non-Jupyter)
 
 ```bash
+git clone https://github.com/sickagents/boterdrop-solver
+cd boterdrop-solver
 apt update -y && apt install -y xvfb libasound2
 pip install fastapi==0.95.2 uvicorn "camoufox[fetch]" loguru psutil playwright
 python3 -m camoufox fetch
